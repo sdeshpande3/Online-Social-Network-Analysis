@@ -1,0 +1,28 @@
+1. Looking at the top errors printed by get_top_misclassified, name two ways you would modify your classifier to improve accuracy (it could be features, tokenization, or something else.)
+
+
+The accuracy of the classifier model can be improved by modifying features and tokenization. It can be done by removing features with extremely low frequency and by stemming, that is, reducing inflected words to their root form. Stop words can also be removed from features.
+
+
+
+2. Implement one of the above methods. How did it affect the results?
+The tokenization method can be implemented to improve accuracy. Stopwords are removed. The accuracy is improved from 0.730000 to 0.742500.
+
+    l=[]
+    stop_words = set(stopwords.words('english'))
+
+    for word in doc.split(" "):
+        if word not in stop_words:
+            l.append(word)
+    str = ' '.join(l)
+    
+    
+    if keep_internal_punct == True:
+        splitting='[\w_][^\s]*[\w_]|[\w_]'
+        x = re.findall(splitting, str.lower())
+        return np.array(x)        
+    else:
+        splitting='[\w_]+'
+        x=re.findall(splitting, str.lower())
+        return np.array(x)
+        
